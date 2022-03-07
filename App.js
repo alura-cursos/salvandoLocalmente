@@ -1,6 +1,7 @@
-import { SafeAreaView, StatusBar, StyleSheet } from "react-native"
+import { FlatList, SafeAreaView, StatusBar, StyleSheet } from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NotaEditor from "./src/componentes/NotaEditor"
+import { Nota } from "./src/componentes/Nota"
 import { useState } from "react"
 
 export default function App() {
@@ -16,6 +17,10 @@ export default function App() {
 
   return (
     <SafeAreaView style={estilos.container}>
+      <FlatList
+        data={notas}
+        renderItem={(nota) => <Nota {...nota}/>}
+        keyExtractor={nota => nota[0]}/>
       <NotaEditor mostraNotas={mostraNotas}/>
       <StatusBar/>
     </SafeAreaView>
