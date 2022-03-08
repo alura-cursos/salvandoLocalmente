@@ -28,6 +28,16 @@ export async function atualizaNota(nota) {
   })
 }
 
+export async function removeNota(nota) {
+  return new Promise((resolve) => {
+    db.transaction((transaction) => {
+      transaction.executeSql("DELETE FROM Notas WHERE id = ?;", [nota.id], () => {
+        resolve("Nota removida com sucesso!")
+      })
+    })
+  })
+}
+
 export async function buscaNotas() {
   return new Promise((resolve) => {
     db.transaction((transaction) => {
